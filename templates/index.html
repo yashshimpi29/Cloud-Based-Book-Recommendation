@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<title>Book Recommendation</title>
+
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="center">Book Recommendation Engine</h1>
+
+
+    <form action = "/" method="POST" >
+        <div class="row">
+            <div class="center">
+                <label>Select Book</label>
+                <select name="book_name" data-live-search="true" id="book_name" class="form-control" title="Select Book Name">
+                {% for row in data %}
+                    <option value="{{row['Book_detail']}}", name = "book", id="book">{{row.Book_detail}}</option>
+                {% endfor %}
+                </select>
+            </div>
+        </div>
+        <input type="submit" value="SuggestBook">
+    </form>
+
+    <br><br>
+    <div class="center">
+        Requested Book : {{book_name}}
+    </div>
+    
+    <br>
+    <table>
+        <tr>
+          <th>Book Name</th>
+          <th>Author</th>
+          <th>Score</th>
+          <th>Genres</th>
+        </tr>
+    </table>
+    {% for book in books %}
+    <table>
+        <tr>
+            <td>{{book.title}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.score}}</td>
+            <td>{{book.genre_main}}</td>
+        </tr>
+    </table>
+    {% endfor %}
+
+
+{% endblock %}
